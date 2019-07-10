@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="maincolor">#EE4100</color>
+    <color name="sendcolor">#FA7254</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="grey">#EBE8E8</color>
+    <color name="sub_text_title">#979797</color>
+    <color name="sub_text_title_99">#aaefefef</color>
+
+    <color name="play_list_line">#ECEEF0</color>
+    <color name="play_track_list_text_color">#7D828C</color>
+
+</resources>

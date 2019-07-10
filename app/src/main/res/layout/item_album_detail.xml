@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="#ffffff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/item_id_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="15dp"
+        android:text="77"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/title_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/item_id_text"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/trick_title_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="#000000"
+            android:text="彩蛋，这是我最好的和篇文章呢"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@mipmap/icon_play"/>
+
+            <TextView
+                android:id="@+id/track_play_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="245.3万"
+                android:textSize="12sp"/>
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="55W"
+                android:id="@+id/detail_item_duration"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/update_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/title_container"
+        android:gravity="center"
+        android:text="2018-09"/>
+
+</RelativeLayout>

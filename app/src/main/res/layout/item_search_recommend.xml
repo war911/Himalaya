@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/selector_search_recommend_bg"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <ImageView
+        android:id="@+id/img_recommedn_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/search_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+    <TextView
+        android:id="@+id/search_recommend_title"
+        android:textSize="16sp"
+        android:maxLines="1"
+        android:layout_toRightOf="@id/img_recommedn_icon"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:text="我是标题。。。"
+        android:textColor="@color/sub_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/sub_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</RelativeLayout>

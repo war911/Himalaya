@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingBottom="8dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/img"
+        android:layout_margin="10dp"
+        android:background="@drawable/play_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:id="@+id/track_tv"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/img"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:text="我是标题"
+        android:textSize="16sp"
+        android:textColor="@color/play_track_list_text_color"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+    <View
+        android:layout_alignBottom="@+id/track_tv"
+        android:background="@color/play_list_line"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+</RelativeLayout>
