@@ -95,12 +95,12 @@ public class HistoryPresenter implements IHistoryPresenter, IHistoryDaoCallback 
     }
 
     @Override
-    public void clearHistories(final Track track) {
+    public void clearHistories() {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 if (mHistoryDao != null) {
-                    mHistoryDao.cleanHistoryTrack(track);
+                    mHistoryDao.cleanHistoryTrack();
                 }
             }
         }).subscribeOn(Schedulers.io()).subscribe();

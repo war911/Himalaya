@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.war.ximalayaradio.adapters.AlbumListAdapter;
 import com.example.war.ximalayaradio.adapters.SearchRecommendAdapter;
 import com.example.war.ximalayaradio.base.BaseActivity;
+import com.example.war.ximalayaradio.base.BaseApplication;
 import com.example.war.ximalayaradio.interfaces.ISearchCallBack;
 import com.example.war.ximalayaradio.presenters.AlbumDetalPresenter;
 import com.example.war.ximalayaradio.presenters.SearchPresenter;
@@ -31,6 +32,7 @@ import com.example.war.ximalayaradio.views.FlowTextLayout;
 import com.example.war.ximalayaradio.views.UILoader;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.squareup.leakcanary.RefWatcher;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.word.HotWord;
 import com.ximalaya.ting.android.opensdk.model.word.QueryResult;
@@ -68,7 +70,8 @@ public class SearchActivity extends BaseActivity implements ISearchCallBack {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
-
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+        refWatcher.watch(this);
         initView();
         initEvent();
         initPresenter();

@@ -19,9 +19,11 @@ import android.widget.TextView;
 
 import com.example.war.ximalayaradio.adapters.PlayerTrackPagerAdapter;
 import com.example.war.ximalayaradio.base.BaseActivity;
+import com.example.war.ximalayaradio.base.BaseApplication;
 import com.example.war.ximalayaradio.interfaces.IPlayerCallback;
 import com.example.war.ximalayaradio.presenters.PlayerPresenter;
 import com.example.war.ximalayaradio.views.SobPopWindow;
+import com.squareup.leakcanary.RefWatcher;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl;
 
@@ -75,6 +77,8 @@ public class PlayerActivity extends BaseActivity implements IPlayerCallback, Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_layout);
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+        refWatcher.watch(this);
         initView();
         mPlayerPresenter = PlayerPresenter.getPlayerPresenter();
         Log.i(TAG, "onCreate: -- >注册");

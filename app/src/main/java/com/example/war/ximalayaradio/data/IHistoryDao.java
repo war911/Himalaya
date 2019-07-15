@@ -26,9 +26,9 @@ public interface IHistoryDao {
 
     /**
      * 清除历史
-     * @param track
+     * @param
      */
-    void cleanHistoryTrack(Track track);
+    void cleanHistoryTrack();
 
     /**
      * 获取历史

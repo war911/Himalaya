@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.war.ximalayaradio.adapters.DetailListAdapter;
 import com.example.war.ximalayaradio.base.BaseActivity;
+import com.example.war.ximalayaradio.base.BaseApplication;
 import com.example.war.ximalayaradio.interfaces.IAlbumDetalViewCallback;
 import com.example.war.ximalayaradio.interfaces.IPlayerCallback;
 import com.example.war.ximalayaradio.interfaces.ISubscriptionCallback;
@@ -33,6 +34,7 @@ import com.example.war.ximalayaradio.views.UILoader;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
+import com.squareup.leakcanary.RefWatcher;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
@@ -83,6 +85,8 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+        refWatcher.watch(this);
         setContentView(R.layout.activity_detail);
 
         getWindow().getDecorView().setSystemUiVisibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);

@@ -5,18 +5,32 @@
 
     <RelativeLayout
         android:layout_centerInParent="true"
-        android:layout_width="240dp"
+        android:layout_width="300dp"
         android:background="@drawable/shape_confirm_dialog_bg"
-        android:layout_height="130dp">
+        android:layout_height="180dp">
         <TextView
             android:id="@+id/tv_title"
             android:layout_marginTop="20dp"
-            android:text="取消订阅该专辑吗"
-            android:textColor="@android:color/black"
+            android:text="删除当前历史记录吗"
+            android:textColor="@color/sub_text_title"
             android:layout_centerHorizontal="true"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:textSize="18sp"
+                android:text="清除所有的历史记录"
+                android:id="@+id/checkBox"
+                android:textColor="@color/sub_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/dialog_button_container"
             android:layout_alignParentBottom="true"
@@ -25,7 +39,7 @@
             android:layout_height="60dp">
             <TextView
                 android:id="@+id/dialog_check_box_cancel"
-                android:text="取消订阅吗"
+                android:text="取消"
                 android:textSize="20sp"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -36,8 +50,8 @@
                 android:background="#dfdfdf"
                 android:layout_height="match_parent"/>
             <TextView
-                android:id="@+id/dialog_check_box_comfirm"
-                android:text="我再想想"
+                android:id="@+id/dialog_check_box_comfrim"
+                android:text="确定"
                 android:gravity="center"
                 android:textColor="@color/maincolor"
                 android:textSize="20sp"

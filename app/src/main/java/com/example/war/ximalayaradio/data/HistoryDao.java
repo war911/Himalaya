@@ -39,6 +39,10 @@ public class HistoryDao implements IHistoryDao {
             try {
                 db = mDbHelper.getWritableDatabase();
                 db.beginTransaction();
+
+                int delete = db.delete(Constants.HISTORY_TB_NAME, Constants.HISTORY_TRACK_ID + "=?"
+                        , new String[]{track.getDataId() + ""});
+
                 ContentValues valuses = new ContentValues();
                 //封装数据
                 valuses.put(Constants.HISTORY_TITLE, track.getTrackTitle());
@@ -46,7 +50,7 @@ public class HistoryDao implements IHistoryDao {
                 valuses.put(Constants.HISTORY_DRUATION, track.getDuration());
                 valuses.put(Constants.HISTORY_TRACK_ID, track.getDataId());
                 valuses.put(Constants.HISTORY_UPDATE_TIME, track.getUpdatedAt());
-                valuses.put(Constants.HISTORY_COVER, track.getCoverUrlLarge());
+                valuses.put(Constants.HISTORY_COVER, track.getCoverUrlMiddle());
 
 
                 //插入数据
@@ -99,7 +103,7 @@ public class HistoryDao implements IHistoryDao {
     }
 
     @Override
-    public void cleanHistoryTrack(Track track) {
+    public void cleanHistoryTrack() {
         synchronized (mLock) {
 
             SQLiteDatabase db = null;

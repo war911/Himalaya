@@ -19,17 +19,20 @@ public class RecommendPresenter implements IRecommendPresenter {
     private List<IRecommendViewCallback> mCallbacks = new ArrayList<>();
     private List<Album> mCurrentRecommend = null;
 
-    private RecommendPresenter(){}
+    private RecommendPresenter() {
+    }
 
     private static RecommendPresenter sInstance = null;
+    private List<Album> mRecommendList;
 
     /**
      * 获取单例对象
+     *
      * @return
      */
-    public static RecommendPresenter getsInstance(){
+    public static RecommendPresenter getsInstance() {
         if (sInstance == null) {
-            synchronized (RecommendPresenter.class){
+            synchronized (RecommendPresenter.class) {
                 if (sInstance == null) {
                     sInstance = new RecommendPresenter();
                 }
@@ -37,32 +40,41 @@ public class RecommendPresenter implements IRecommendPresenter {
         }
         return sInstance;
     }
+
     /**
      * 获取推荐内容，其实就是猜你喜欢
      * 这个借口3.10.6获取猜你喜欢专辑
      */
     @Override
     public void getRecommendList() {
+        //如果内存不为空，就直接使用内容
+        if (mRecommendList != null && mRecommendList.size() > 0) {
+
+            handlerRecommendResult(mRecommendList);
+            return;
+        }
         updateLoading();
         HimilayaApi himilayaApi = HimilayaApi.getHimilayaApi();
         himilayaApi.getRecommendList(new IDataCallBack<GussLikeAlbumList>() {
+
+
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
                 //数据获取成功
                 if (gussLikeAlbumList != null) {
-                    List<Album> albumList = gussLikeAlbumList.getAlbumList();
-                    LogUtil.d(TAG,"albumList -- >" + albumList);
+                    mRecommendList = gussLikeAlbumList.getAlbumList();
+                    LogUtil.d(TAG, "albumList -- >" + mRecommendList);
                     //更新UI
 //                    upRecommandUI(albumList);
-                    handlerRecommendResult(albumList);
+                    handlerRecommendResult(mRecommendList);
                 }
             }
 
             @Override
             public void onError(int i, String s) {
                 //数据获取出错
-                LogUtil.d(TAG,"error --- > " + i);
-                LogUtil.d(TAG,"errorMsg -- >" + s);
+                LogUtil.d(TAG, "error --- > " + i);
+                LogUtil.d(TAG, "errorMsg -- >" + s);
                 HandlerError();
             }
         });
@@ -84,7 +96,7 @@ public class RecommendPresenter implements IRecommendPresenter {
                 for (IRecommendViewCallback mCallback : mCallbacks) {
                     mCallback.onEmpty();
                 }
-            }else {
+            } else {
                 for (IRecommendViewCallback mCallback : mCallbacks) {
                     mCallback.onRecommendListLoaded(albumList);
                 }
@@ -95,18 +107,19 @@ public class RecommendPresenter implements IRecommendPresenter {
 
     /**
      * 获取当前推荐列表
-     * @return 使用之前要判空
      *
+     * @return 使用之前要判空
      */
-    public List<Album> getCurrentRecommend(){
+    public List<Album> getCurrentRecommend() {
         return mCurrentRecommend;
     }
 
-    private void updateLoading(){
+    private void updateLoading() {
         for (IRecommendViewCallback mCallback : mCallbacks) {
             mCallback.onLoading();
         }
     }
+
     @Override
     public void pullToRefeeshMore() {
 

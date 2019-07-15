@@ -25,9 +25,9 @@ public interface IHistoryPresenter extends IBasePrester<IHistoryCallback> {
 
     /**
      * 清除历史
-     * @param track
+     * @param
      */
-    void clearHistories(Track track);
+    void clearHistories();
 
 
 }

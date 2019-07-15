@@ -2,29 +2,30 @@ package com.example.war.ximalayaradio.views;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.example.war.ximalayaradio.R;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
-public class ConfirmDialog extends Dialog {
+public class ConfirmCheckBoxDialog extends Dialog {
 
-    private View mCancelSub;
-    private View mGiveUp;
+    private View mCancel;
+    private View mConfirm;
     private onDialogActionClickLinstener mClickLinstener = null;
     private Album mAlbum = null;
+    private CheckBox mCheckBox;
 
-    public ConfirmDialog(Context context) {
+    public ConfirmCheckBoxDialog(Context context) {
         this(context,0);
     }
 
-    public ConfirmDialog(Context context, int themeResId) {
+    public ConfirmCheckBoxDialog(Context context, int themeResId) {
         this(context, true,null);
     }
 
-    protected ConfirmDialog(Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
+    protected ConfirmCheckBoxDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
@@ -32,40 +33,44 @@ public class ConfirmDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.dialog_confirm);
+        setContentView(R.layout.dialog_checkbox_confirm);
         initView();
         initListener();
     }
 
     private void initListener() {
-        mCancelSub.setOnClickListener(new View.OnClickListener() {
+        mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mClickLinstener.onCancelSubClick(mAlbum);
             }
         });
 
-        mGiveUp.setOnClickListener(new View.OnClickListener() {
+        mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mClickLinstener.onGiveUpClick();
+                boolean checked = mCheckBox.isChecked();
+
+                mClickLinstener.onConfirmClick(checked);
             }
         });
     }
 
     private void initView() {
-        mCancelSub = this.findViewById(R.id.dialog_check_box_cancel);
-        mGiveUp = this.findViewById(R.id.dialog_check_box_comfrim);
+        mCancel = this.findViewById(R.id.dialog_check_box_cancel);
+        mConfirm = this.findViewById(R.id.dialog_check_box_comfrim);
+        mCheckBox = this.findViewById(R.id.checkBox);
     }
 
-    public void setOnDialogActionClickLinstener(onDialogActionClickLinstener linstener, Album album){
+    public void setOnDialogActionClickLinstener(onDialogActionClickLinstener linstener){
         this.mClickLinstener = linstener;
-        this.mAlbum = album;
     }
+
+
 
     public interface onDialogActionClickLinstener{
-        void onCancelSubClick( Album album);
+        void onCancelSubClick(Album album);
 
-        void onGiveUpClick();
+        void onConfirmClick(boolean checked);
     }
 }

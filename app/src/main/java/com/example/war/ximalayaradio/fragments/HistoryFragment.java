@@ -11,16 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.war.ximalayaradio.PlayerActivity;
 import com.example.war.ximalayaradio.R;
-import com.example.war.ximalayaradio.adapters.AlbumListAdapter;
 import com.example.war.ximalayaradio.adapters.DetailListAdapter;
 import com.example.war.ximalayaradio.base.BaseFragment;
 import com.example.war.ximalayaradio.interfaces.IHistoryCallback;
 import com.example.war.ximalayaradio.interfaces.IHistoryPresenter;
 import com.example.war.ximalayaradio.presenters.HistoryPresenter;
 import com.example.war.ximalayaradio.presenters.PlayerPresenter;
+import com.example.war.ximalayaradio.views.ConfirmCheckBoxDialog;
 import com.example.war.ximalayaradio.views.UILoader;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
@@ -32,7 +33,7 @@ import java.util.List;
 
 
 
-public class HistoryFragment extends BaseFragment implements IHistoryCallback, UILoader.OnRetryClickListener, DetailListAdapter.ItemClckListener {
+public class HistoryFragment extends BaseFragment implements IHistoryCallback, UILoader.OnRetryClickListener, DetailListAdapter.ItemClckListener, DetailListAdapter.ItemLongClickListener, ConfirmCheckBoxDialog.onDialogActionClickLinstener {
 
     private static final String TAG = "HistoryFragment";
     private IHistoryPresenter mIHistoryPresenter = null;
@@ -41,6 +42,8 @@ public class HistoryFragment extends BaseFragment implements IHistoryCallback, U
     private UILoader mUILoader;
     private DetailListAdapter mAdapter;
     private FrameLayout mRootView;
+    private Track mCurrentClickHisTroyItem = null;
+    private ConfirmCheckBoxDialog mDialog;
 
     @Override
     protected View onSubViewLoaded(final LayoutInflater layoutInflater, ViewGroup container) {
@@ -121,6 +124,7 @@ public class HistoryFragment extends BaseFragment implements IHistoryCallback, U
         mAdapter = new DetailListAdapter();
         mHRecyclerView.setAdapter(mAdapter);
         mAdapter.setItemClickListener(this);
+        mAdapter.setItemLongClickListener(this);
 
         return mRootView;
     }
@@ -171,5 +175,37 @@ public class HistoryFragment extends BaseFragment implements IHistoryCallback, U
 
         Intent intent = new Intent(getActivity(), PlayerActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemLongCLick(Track track) {
+        this.mCurrentClickHisTroyItem = track;
+        //删除历史
+        Toast.makeText(getActivity(), "删除历史", Toast.LENGTH_SHORT).show();
+
+        mDialog = new ConfirmCheckBoxDialog(getActivity());
+        mDialog.setOnDialogActionClickLinstener(this);
+        mDialog.show();
+    }
+
+    @Override
+    public void onCancelSubClick(Album album) {
+        mDialog.dismiss();
+    }
+
+    @Override
+    public void onConfirmClick(boolean checked) {
+        if (checked) {
+            if (mIHistoryPresenter != null && mCurrentClickHisTroyItem != null) {
+                mIHistoryPresenter.clearHistories();
+            }
+        }else {
+            //删除历史
+            if (mIHistoryPresenter != null && mCurrentClickHisTroyItem != null) {
+                mIHistoryPresenter.delHistory(mCurrentClickHisTroyItem);
+            }
+        }
+
+        mDialog.dismiss();
     }
 }

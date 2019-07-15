@@ -12,12 +12,14 @@ import android.widget.TextView;
 
 import com.example.war.ximalayaradio.adapters.IndicatorAdapter;
 import com.example.war.ximalayaradio.adapters.MainContentAdapter;
+import com.example.war.ximalayaradio.base.BaseApplication;
 import com.example.war.ximalayaradio.data.HimalayaDHHelper;
 import com.example.war.ximalayaradio.interfaces.IPlayerCallback;
 import com.example.war.ximalayaradio.presenters.PlayerPresenter;
 import com.example.war.ximalayaradio.presenters.RecommendPresenter;
 import com.example.war.ximalayaradio.utils.LogUtil;
 import com.example.war.ximalayaradio.views.RoundRectImageView;
+import com.squareup.leakcanary.RefWatcher;
 import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
@@ -48,6 +50,8 @@ import java.util.List;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+         RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+         refWatcher.watch(this);
         initview();
         initEvent();
         
