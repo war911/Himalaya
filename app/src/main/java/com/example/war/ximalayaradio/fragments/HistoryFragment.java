@@ -165,20 +165,20 @@ public class HistoryFragment extends BaseFragment implements IHistoryCallback, U
     /**
      * Adapter 点击事件 跳转详细列表界面
      * @param list
-     * @param postion
+     * @param position
      */
     @Override
-    public void onItemClick(List<Track> list, int postion) {
+    public void onItemClick(List<Track> list, int position) {
         //设置播放器的数据
         PlayerPresenter playerPresenter = PlayerPresenter.getPlayerPresenter();
-        playerPresenter.setPlayList(list, postion);
+        playerPresenter.setPlayList(list, position);
 
         Intent intent = new Intent(getActivity(), PlayerActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void onItemLongCLick(Track track) {
+    public void onItemLongClick(Track track) {
         this.mCurrentClickHisTroyItem = track;
         //删除历史
         Toast.makeText(getActivity(), "删除历史", Toast.LENGTH_SHORT).show();

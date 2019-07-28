@@ -417,11 +417,11 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
      * adapter点击事件
      */
     @Override
-    public void onItemClick(List<Track> list, int postion) {
-        mIndex = postion;
+    public void onItemClick(List<Track> list, int position) {
+        mIndex = position;
         //设置播放器的数据
         PlayerPresenter playerPresenter = PlayerPresenter.getPlayerPresenter();
-        playerPresenter.setPlayList(list, postion);
+        playerPresenter.setPlayList(list, position);
         //TODO跳转到播放器界面
         Intent intent = new Intent(this, PlayerActivity.class);
         startActivity(intent);

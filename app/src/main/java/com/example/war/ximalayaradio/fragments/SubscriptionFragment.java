@@ -71,13 +71,12 @@ public class SubscriptionFragment extends BaseFragment implements ISubscriptionC
     private View creatSuccessView() {
         View itemView = LayoutInflater.from(BaseApplication.getAppContext()).inflate(R.layout.item_subscription, null);
         mRefreshLayout = itemView.findViewById(R.id.sub_refresh);
+        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setPureScrollModeOn();
+
         mRecyclerView = itemView.findViewById(R.id.sub_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
-        mListAdapter = new AlbumListAdapter();
-        mRecyclerView.setAdapter(mListAdapter);
-
-
         mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -88,6 +87,10 @@ public class SubscriptionFragment extends BaseFragment implements ISubscriptionC
             }
         });
 
+
+
+        mListAdapter = new AlbumListAdapter();
+        mRecyclerView.setAdapter(mListAdapter);
 
         mListAdapter.setOnAlbumItemClickListen(this);
         mListAdapter.setOnAlbumItemLongClickListener(this);
@@ -132,6 +135,10 @@ public class SubscriptionFragment extends BaseFragment implements ISubscriptionC
         } else {
             if (mListAdapter != null) {
                 mListAdapter.setData(albums);
+                for (Album album : albums) {
+                    Log.i(TAG, "onSubscriptionsLoaded: ---- WAR --> "+album.getAlbumTitle());
+
+                }
             }
             if (mUiLoader != null) {
                 mUiLoader.updateStatus(UILoader.UIStatus.SUCCESS);

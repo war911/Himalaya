@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.war.ximalayaradio.R;
 import com.example.war.ximalayaradio.base.BaseApplication;
@@ -17,7 +16,6 @@ import com.ximalaya.ting.android.opensdk.model.track.Track;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.InnerHolder> {
 
@@ -40,7 +38,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull InnerHolder innerHolder, final int postion) {
+    public void onBindViewHolder(@NonNull InnerHolder innerHolder, final int position) {
         //找到控件
         View itemView = innerHolder.itemView;
         //顺序ID
@@ -55,14 +53,14 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
         TextView updateTv = itemView.findViewById(R.id.update_time_text);
 
         //设置数据
-        final Track track = mDetailData.get(postion);
-        orderTv.setText((postion + 1) + "");
+        final Track track = mDetailData.get(position);
+        orderTv.setText((position + 1) + "");
         titleTv.setText(track.getTrackTitle());
         playCount.setText(track.getPlayCount() + "");
         durationTv.setText(mSimpleFormatter.format(track.getDuration() * 1000));
         updateTv.setText(mSimpleDateFormat.format(track.getUpdatedAt()) + "");
 
-        if (mCurrIndex == postion) {
+        if (mCurrIndex == position) {
             orderTv.setTextColor(BaseApplication.getAppContext().getResources().getColor(R.color.maincolor));
             titleTv.setTextColor(BaseApplication.getAppContext().getResources().getColor(R.color.maincolor));
             playCount.setTextColor(BaseApplication.getAppContext().getResources().getColor(R.color.maincolor));
@@ -73,6 +71,8 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
             titleTv.setTextColor(Color.BLACK);
             playCount.setTextColor(Color.BLACK);
             updateTv.setTextColor(Color.BLACK);
+            durationTv.setTextColor(Color.BLACK);
+
         }
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +80,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
             public void onClick(View v) {
 
                 if (mItemClckListener != null) {
-                    mItemClckListener.onItemClick(mDetailData, postion);
+                    mItemClckListener.onItemClick(mDetailData, position);
                 }
             }
         });
@@ -89,7 +89,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
             @Override
             public boolean onLongClick(View v) {
                 if (mItemLongclick != null) {
-                    mItemLongclick.onItemLongCLick(track);
+                    mItemLongclick.onItemLongClick(track);
                 }
                 return true;
             }
@@ -122,12 +122,12 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
     }
 
     public interface ItemClckListener {
-        void onItemClick(List<Track> list, int postion);
+        void onItemClick(List<Track> list, int position);
     }
 
-    public void upDataTextColor(int postion) {
+    public void upDataTextColor(int position) {
 
-        mCurrIndex = postion;
+        mCurrIndex = position;
         notifyDataSetChanged();
     }
 
@@ -136,6 +136,6 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
     }
 
     public interface  ItemLongClickListener{
-        void onItemLongCLick(Track track);
+        void onItemLongClick(Track track);
     }
 }

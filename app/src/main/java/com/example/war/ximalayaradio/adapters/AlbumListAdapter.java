@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.war.ximalayaradio.R;
+import com.example.war.ximalayaradio.base.BaseApplication;
 import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author war
+ */
 public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.InnerHolder> {
     private static final String TAG = "AlbumListAdapter";
     private List<Album> mData = new ArrayList<>();
@@ -34,9 +39,9 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.Inne
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InnerHolder innerHolder, int postion) {
+    public void onBindViewHolder(@NonNull InnerHolder innerHolder, final int position) {
         //封装数据
-        innerHolder.itemView.setTag(postion);
+        innerHolder.itemView.setTag(position);
         innerHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,15 +57,15 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.Inne
             @Override
             public boolean onLongClick(View v) {
                 //true 表示消费事件
-                int poition = (int) v.getTag();
-                Album album = mData.get(poition);
+                int position = (int) v.getTag();
+                Album album = mData.get(position);
                 if (mItemLongClickListener != null) {
-                    mItemLongClickListener.onItemLongClick(poition,album);
+                    mItemLongClickListener.onItemLongClick(position,album);
                 }
                 return true;
             }
         });
-        innerHolder.setData(mData.get(postion));
+        innerHolder.setData(mData.get(position));
     }
 
     @Override
@@ -111,12 +116,12 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.Inne
             albumContentCountTv = itemView.findViewById(R.id.album_countent_size);
 
             if (album.getAlbumTitle().isEmpty()) {
-                Log.i(TAG, "setData: --- > album.getAlbumTitle() isempty !!! ");
+                Log.i(TAG, "WAR setData: --- > album.getAlbumTitle() isempty !!! ");
             }else {
-                Log.i(TAG, "setData: --- album.getAlbumTitle()"+album.getAlbumTitle());
+                Log.i(TAG, "WAR setData: --- album.getAlbumTitle()"+album.getAlbumTitle());
             }
             albumTitleTv.setText(album.getAlbumTitle());
-//            albumTitleTv.setText("????????????");
+
 
             albumdesrcTv.setText(album.getAlbumIntro());
             albumPlayCountTv.setText(album.getPlayCount() + "");
