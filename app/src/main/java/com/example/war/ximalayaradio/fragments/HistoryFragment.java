@@ -172,6 +172,7 @@ public class HistoryFragment extends BaseFragment implements IHistoryCallback, U
         //设置播放器的数据
         PlayerPresenter playerPresenter = PlayerPresenter.getPlayerPresenter();
         playerPresenter.setPlayList(list, position);
+        Log.i(TAG, "onItemClick: --- >WAR!! 历史 -- > "+list.get(position));
 
         Intent intent = new Intent(getActivity(), PlayerActivity.class);
         startActivity(intent);

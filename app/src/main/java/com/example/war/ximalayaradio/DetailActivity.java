@@ -422,6 +422,7 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
         //设置播放器的数据
         PlayerPresenter playerPresenter = PlayerPresenter.getPlayerPresenter();
         playerPresenter.setPlayList(list, position);
+        Log.i(TAG, "onItemClick: --- > WAR!! --- > !"+ list.get(position));
         //TODO跳转到播放器界面
         Intent intent = new Intent(this, PlayerActivity.class);
         startActivity(intent);

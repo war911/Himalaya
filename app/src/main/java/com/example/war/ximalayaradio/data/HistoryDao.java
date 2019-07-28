@@ -7,9 +7,12 @@ import android.util.Log;
 
 import com.example.war.ximalayaradio.base.BaseApplication;
 import com.example.war.ximalayaradio.utils.Constants;
+import com.ximalaya.ting.android.opensdk.model.album.Album;
+import com.ximalaya.ting.android.opensdk.model.album.SubordinatedAlbum;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HistoryDao implements IHistoryDao {
@@ -51,7 +54,13 @@ public class HistoryDao implements IHistoryDao {
                 valuses.put(Constants.HISTORY_TRACK_ID, track.getDataId());
                 valuses.put(Constants.HISTORY_UPDATE_TIME, track.getUpdatedAt());
                 valuses.put(Constants.HISTORY_COVER, track.getCoverUrlMiddle());
-
+                valuses.put(Constants.HISTORY_KIND, track.getKind());
+                valuses.put(Constants.HISTORY_URL, track.getCoverUrlLarge());
+                if (track.getAlbum() != null) {
+                    valuses.put(Constants.HISTORY_ALBUM_ID,track.getAlbum().getAlbumId());
+                }else {
+                    Log.i(TAG, "addHistoryTrack: ---- > null track.getAlbum() WAR@@@");
+                }
 
                 //插入数据
                 db.insert(Constants.HISTORY_TB_NAME, null, valuses);
@@ -158,7 +167,13 @@ public class HistoryDao implements IHistoryDao {
                     track.setUpdatedAt(updateTime);
                     String corver = cursor.getString(cursor.getColumnIndex(Constants.HISTORY_COVER));
                     track.setCoverUrlMiddle(corver);
-
+                    SubordinatedAlbum album = new SubordinatedAlbum();
+                    album.setAlbumId(cursor.getColumnIndex(Constants.HISTORY_ALBUM_ID));
+                    track.setAlbum(album);
+                    String kind = cursor.getString(cursor.getColumnIndex(Constants.HISTORY_KIND));
+                    track.setKind(kind);
+                    String url = cursor.getString(cursor.getColumnIndex(Constants.HISTORY_URL));
+                    track.setCoverUrlLarge(url);
                     historyList.add(track);
                 }
 

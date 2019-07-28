@@ -10,6 +10,8 @@ import com.example.war.ximalayaradio.utils.Constants;
 public class HimalayaDHHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "HimalayaDHHelper";
+    private int OldeVersion = 1;
+    private int NowVersion = 2;
 
     public HimalayaDHHelper(Context context) {
         //name 数据库名字，factory游标工厂，version版本号
@@ -19,6 +21,12 @@ public class HimalayaDHHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i(TAG, "onCreate: -- > ");
+        initDb(db);
+//        onUpgrade(db,OldeVersion,NowVersion);
+
+    }
+
+    private void initDb(SQLiteDatabase db) {
         //创建数据表
         //订阅相关的字段
         //图片，title，描述，播放量,作者名称(详情界面)，专辑id
@@ -43,7 +51,10 @@ public class HimalayaDHHelper extends SQLiteOpenHelper {
                 Constants.HISTORY_COVER + " integer, " +
                 Constants.HISTORY_PLAY_COUNT + " varchar, " +
                 Constants.HISTORY_DRUATION + " varchar, " +
-                Constants.HISTORY_UPDATE_TIME + " integer" +
+                Constants.HISTORY_UPDATE_TIME + " integer," +
+                Constants.HISTORY_ALBUM_ID + " integer," +
+                Constants.HISTORY_KIND + " varchar," +
+                Constants.HISTORY_URL + " varchar" +
                 ")";
 
         db.execSQL(histoTbsql);
@@ -51,6 +62,8 @@ public class HimalayaDHHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        String sql = "Alter table "+"histoTbsql"+" add column "+"historyAlbumId Integer";
+//        db.execSQL(sql);
 
     }
 }

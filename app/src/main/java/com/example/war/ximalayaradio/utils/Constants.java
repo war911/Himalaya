@@ -36,6 +36,9 @@ public class Constants {
     public static final String HISTORY_TRACK_ID = "trackId";
     public static final String HISTORY_UPDATE_TIME = "historyUpdateTime";
     public static final String HISTORY_COVER = "historyCover";
+    public static final String HISTORY_ALBUM_ID = "historyAlbumId";
+    public static final String HISTORY_KIND = "historyKind";
+    public static final String HISTORY_URL = "historyUrl";
 
     //订阅最多个数
     public static final int MAX_SUB_COUNT = 100;
