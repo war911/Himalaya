@@ -1,6 +1,8 @@
  package com.example.war.ximalayaradio;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -44,7 +46,6 @@ import java.util.List;
      private ImageView mPlayConrol;
      private View mPlayControlItem;
      private View mSearchBtn;
-
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,7 +266,7 @@ import java.util.List;
      }
 
      @Override
-     public void upDatePlayIndexForUi(int 更新播放postion) {
+     public void upDatePlayIndexForUi(int position) {
 
      }
 

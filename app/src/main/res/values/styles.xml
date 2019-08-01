@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/maincolor</item>
         <item name="colorPrimaryDark">@color/maincolor</item>
         <item name="colorAccent">@color/maincolor</item>
+        <item name="android:windowBackground">@drawable/bg</item>
     </style>
 
     <style name="pop_animation" parent="android:Animation">

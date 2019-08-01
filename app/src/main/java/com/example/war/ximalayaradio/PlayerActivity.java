@@ -521,7 +521,7 @@ public class PlayerActivity extends BaseActivity implements IPlayerCallback, Vie
     }
 
     @Override
-    public void upDatePlayIndexForUi(int postion) {
+    public void upDatePlayIndexForUi(int position) {
 
     }
 

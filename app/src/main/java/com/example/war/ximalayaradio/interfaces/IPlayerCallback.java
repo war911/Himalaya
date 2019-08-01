@@ -83,10 +83,10 @@ public interface IPlayerCallback {
     void updateListOrder(boolean isReverse);
 
     /**
-     * 更新播放postion
-     * @param index
+     * 更新播放position
+     * @param position position
      */
-    void upDatePlayIndexForUi(int 更新播放postion);
+    void upDatePlayIndexForUi(int position);
 
     void onPlayByAlbumId(List<Track> tracks);
     

@@ -16,5 +16,6 @@
     <color name="play_list_line">#ECEEF0</color>
     <color name="play_track_list_text_color">#7D828C</color>
     <color name="text_color">#ff848484</color>
+    <color name="bg_white">#ffffff</color>
 
 </resources>

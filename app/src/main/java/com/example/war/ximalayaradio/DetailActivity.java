@@ -311,13 +311,14 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
         Log.i(TAG, "onDetailListLoaded: ---- > mDetailListAdapter.setData(tracks);");
         Log.i(TAG, "mDetailListAdapter.setData(tracks);" + mAlbumDetalPresenter.isPlayCurrentAlbumList());
         for (int i = 0; i < mTrackList.size(); i++) {
-            Log.i(TAG, "onDetailListLoaded: --- > "+ i+" ----> "+mTrackList);
+            Log.i(TAG, "onDetailListLoaded: --- > " + i + " ----> " + mTrackList);
 
         }
 
         mTrackTitle = mPlayerPresenter.getCurrentPlayTitle();
         updatePlayState(mPlayerPresenter.isPlaying());
-        mIndex = mPlayerPresenter.getCurrentPlayIndex();
+        mIndex = mTrackList.indexOf(mPlayerPresenter.getCurrentTrack());
+
 
         Log.i(TAG, "onCreate: --- .> mAlbumDetalPresenter.isPlayCurrentAlbumList()" + mAlbumDetalPresenter.isPlayCurrentAlbumList());
 
@@ -422,7 +423,7 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
         //设置播放器的数据
         PlayerPresenter playerPresenter = PlayerPresenter.getPlayerPresenter();
         playerPresenter.setPlayList(list, position);
-        Log.i(TAG, "onItemClick: --- > WAR!! --- > !"+ list.get(position));
+        Log.i(TAG, "onItemClick: --- > WAR!! --- > !" + list.get(position));
         //TODO跳转到播放器界面
         Intent intent = new Intent(this, PlayerActivity.class);
         startActivity(intent);
@@ -458,7 +459,7 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
     public void onPlayStart() {
         updatePlayState(true);
         if (mPlayerPresenter != null) {
-            mIndex = mPlayerPresenter.getCurrentPlayIndex();
+            mIndex = mTrackList.indexOf(mPlayerPresenter.getCurrentTrack());
         }
     }
 
@@ -536,10 +537,13 @@ public class DetailActivity extends BaseActivity implements IAlbumDetalViewCallb
     }
 
     @Override
-    public void upDatePlayIndexForUi(int postion) {
-        Log.i(TAG, "upDatePlayIndexForUi: --- > mAlbumDetalPresenter.isPlayCurrentAlbumList()" + mAlbumDetalPresenter.isPlayCurrentAlbumList());
-        if (mDetailListAdapter != null) {
+    public void upDatePlayIndexForUi(int position) {
+        if (mTrackList != null && mPlayerPresenter != null && mTrackList.contains(mPlayerPresenter.getCurrentTrack())
+                && mDetailListAdapter != null) {
+            Log.i(TAG, "upDatePlayIndexForUi: --- > mAlbumDetalPresenter.isPlayCurrentAlbumList()" + mAlbumDetalPresenter.isPlayCurrentAlbumList());
             mDetailListAdapter.upDataTextColor(mIndex);
+        }else {
+            Log.d(TAG, "upDatePlayIndexForUi: 当前播放曲目，不是本列表的曲目");
         }
     }
 
