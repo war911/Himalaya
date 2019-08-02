@@ -18,11 +18,11 @@ public class ConfirmCheckBoxDialog extends Dialog {
     private CheckBox mCheckBox;
 
     public ConfirmCheckBoxDialog(Context context) {
-        this(context,0);
+        this(context,R.style.ConfirmDialog);
     }
 
     public ConfirmCheckBoxDialog(Context context, int themeResId) {
-        this(context, true,null);
+        super(context, themeResId);
     }
 
     protected ConfirmCheckBoxDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {

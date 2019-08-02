@@ -4,24 +4,26 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.war.ximalayaradio.R;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 public class ConfirmDialog extends Dialog {
-
-    private View mCancelSub;
-    private View mGiveUp;
+    private static final String TAG = "ConfirmDialog";
+    private TextView mCancelSub;
+    private TextView mGiveUp;
     private onDialogActionClickLinstener mClickLinstener = null;
     private Album mAlbum = null;
 
     public ConfirmDialog(Context context) {
-        this(context,0);
+        this(context,R.style.ConfirmDialog);
     }
 
     public ConfirmDialog(Context context, int themeResId) {
-        this(context, true,null);
+        super(context, themeResId);
     }
 
     protected ConfirmDialog(Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
@@ -56,6 +58,7 @@ public class ConfirmDialog extends Dialog {
     private void initView() {
         mCancelSub = this.findViewById(R.id.dialog_check_box_cancel);
         mGiveUp = this.findViewById(R.id.dialog_check_box_comfrim);
+
     }
 
     public void setOnDialogActionClickLinstener(onDialogActionClickLinstener linstener, Album album){
